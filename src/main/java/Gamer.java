@@ -1,5 +1,7 @@
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 public class Gamer {
     Rule rule = new Rule();
@@ -21,7 +23,7 @@ public class Gamer {
             currentHorse[i] = "";
         }
         for(int i=0;i<4;i++){
-            horses.add(new Horse(i,0));
+            horses.add(new Horse(i,0,0));
         }
     }
 
@@ -30,15 +32,24 @@ public class Gamer {
         System.out.println(YUT_NAME[yut-1] + "!");
         System.out.println("몇번 말을 이동시키겠습니까?(0~3)");
         int i = scanner.nextInt();
-        System.out.println(i+"번 말을 " + yut +"칸 이동시키겠습니다.");
+        System.out.println(i+"번 말을 이동시키겠습니다.");
         currentPosition = horses.get(i).getPosition();
         if(yut == 6){
             yut = -1;
         }
+        currentHorse[currentPosition] = "";
         currentPosition = currentPosition + yut;
+        for(int j=0;j<horses.size();j++){
+            if(horses.get(j).getPosition() == currentPosition){
+                horses.get(j).setPosition(0);
+                horses.get(i).setCombined(horses.get(i).getCombined()+1);
+            }
+        }
+
         if(currentPosition >= 20 || currentPosition == -1){
             currentPosition = 29;
         }
+
         horses.get(i).setPosition(currentPosition);
         currentHorse[currentPosition] = "["+name + Integer.toString(horses.get(i).getName())+"]";
         if(yut == 4 || yut == 5){
