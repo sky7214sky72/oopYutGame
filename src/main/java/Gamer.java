@@ -31,7 +31,23 @@ public class Gamer {
         Scanner scanner = new Scanner(System.in);
         System.out.println(YUT_NAME[yut-1] + "!");
         System.out.println("몇번 말을 이동시키겠습니까?(0~3)");
-        int i = scanner.nextInt();
+        int i = -1;
+        while(i < 0 || i > 3){
+            i = scanner.nextInt();
+            scanner.nextLine();
+            if(i < 0 || i > 3){
+                System.out.println("0~3중 하나를 입력해주세요");
+                System.out.println("몇번 말을 이동시키겠습니까?(0~3)");
+                i = -1;
+                continue;
+            }
+            if(horses.get(i).getPosition() == 29){
+                System.out.println("이미 골인한 말입니다. 다른 말을 이동시켜주세요.");
+                System.out.println("몇번 말을 이동시키겠습니까?(0~3)");
+                i = -1;
+                continue;
+            }
+        }
         System.out.println(i+"번 말을 이동시키겠습니다.");
         currentPosition = horses.get(i).getPosition();
         if(yut == 6){
@@ -49,9 +65,18 @@ public class Gamer {
         if(currentPosition >= 20 || currentPosition == -1){
             currentPosition = 29;
         }
-
         horses.get(i).setPosition(currentPosition);
         currentHorse[currentPosition] = "["+name + Integer.toString(horses.get(i).getName())+"]";
+        if(currentPosition == 29){
+            currentHorse[currentPosition] = "";
+            if(horses.get(i).getCombined() == 0){
+                score += 1;
+                horses.get(i).setName(i+50);
+            }else{
+                score = horses.get(i).getCombined();
+                horses.get(i).setName(i+50);
+            }
+        }
         if(yut == 4 || yut == 5){
             System.out.println(YUT_NAME[yut-1] + "인 경우 한번 더 던집니다.");
             moveHorse(rule.throwYut());

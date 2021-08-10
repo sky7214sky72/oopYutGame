@@ -37,9 +37,9 @@ public class Rule {
     }
 
     public String judgeGame(Gamer gamer1,Gamer gamer2){
-        if(gamer1.getCurrentPosition() == 29){
+        if(gamer1.getScore() == 4){
             return gamer1.getName();
-        }else if(gamer2.getCurrentPosition() == 29){
+        }else if(gamer2.getScore() == 4){
             return gamer2.getName();
         }else{
             return null;
