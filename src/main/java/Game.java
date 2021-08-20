@@ -17,6 +17,12 @@ public class Game {
                 System.out.println("[" + gamer1.getName() + "] 님이 던졌습니다.");
                 yut = rule.throwYut();
                 gamer1.moveHorse(yut);
+                while(yut == 4 || yut == 5){
+                    System.out.println("모나 윷인 경우 한번 더 던집니다.");
+                    yutBoard.showBoard(gamer1, gamer2);
+                    yut = rule.throwYut();
+                    gamer1.moveHorse(yut);
+                }
                 gamer1.setTurn(1);
                 gamer2.setTurn(0);
                 winner = rule.judgeGame(gamer1, gamer2);
@@ -24,6 +30,12 @@ public class Game {
                 System.out.println("[" + gamer2.getName() + "] 님이 던졌습니다.");
                 yut = rule.throwYut();
                 gamer2.moveHorse(yut);
+                while(yut == 4 || yut == 5){
+                    System.out.println("모나 윷인 경우 한번 더 던집니다.");
+                    yutBoard.showBoard(gamer1, gamer2);
+                    yut = rule.throwYut();
+                    gamer2.moveHorse(yut);
+                }
                 gamer1.setTurn(0);
                 gamer2.setTurn(1);
                 winner = rule.judgeGame(gamer1, gamer2);

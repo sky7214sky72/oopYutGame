@@ -1,7 +1,8 @@
 public class Horse {
-    int name;
-    int position;
-    int combined;
+    private int name;
+    private int position;
+    private int combined;
+    private int conbinedName;
 
     public int getName() {
         return name;
@@ -27,10 +28,19 @@ public class Horse {
         this.combined = combined;
     }
 
-    public Horse(int name, int position, int combined) {
+    public int getConbinedName() {
+        return conbinedName;
+    }
+
+    public void setConbinedName(int conbinedName) {
+        this.conbinedName = conbinedName;
+    }
+
+    public Horse(int name, int position, int combined, int conbinedName) {
         this.name = name;
         this.position = position;
         this.combined = combined;
+        this.conbinedName = conbinedName;
     }
 
     @Override
